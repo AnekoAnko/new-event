@@ -25,6 +25,32 @@ router.get('/profile', authenticateToken, async (req, res) => {
   }
 });
 
+router.put('/profile', authenticateToken, async (req, res) => {
+  const { name } = req.body;
+
+  if (!name || typeof name !== 'string' || name.trim().length < 2) {
+    return res.status(400).json({ error: 'Invalid name' });
+  }
+
+  try {
+    const updatedUser = await prisma.user.update({
+      where: { id: req.user.id },
+      data: { name: name.trim() },
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        createdAt: true,
+      },
+    });
+
+    res.json(updatedUser);
+  } catch (error) {
+    console.error('Update profile error:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 // Отримати події створені користувачем
 router.get('/my-events', authenticateToken, async (req, res) => {
   try {
