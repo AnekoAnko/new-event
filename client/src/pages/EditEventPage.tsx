@@ -10,7 +10,6 @@ const EditEventPage = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
-  const [event, setEvent] = useState<IEvent>();
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -25,7 +24,6 @@ const EditEventPage = () => {
     const fetchEvent = async () => {
       try {
         const response = await axios.get(`/api/events/${id}`);
-        setEvent(response.data);
         setFormData({
           title: response.data.title || '',
           description: response.data.description || '',
