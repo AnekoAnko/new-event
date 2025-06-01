@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'sonner';
-import type { IEvent } from '../types/types';
 
 const EditEventPage = () => {
   const { id } = useParams<{ id: string }>();
