@@ -107,7 +107,9 @@ const EventDetails = () => {
           </div>
         </div>
 
-        <p className="text-lg text-gray-800 leading-relaxed mb-10">{event.description}</p>
+        <p className="text-lg text-gray-800 leading-relaxed mb-10 break-words">
+          {event.description}
+        </p>
 
         {user && (
           <div className="mb-6 space-y-4">
