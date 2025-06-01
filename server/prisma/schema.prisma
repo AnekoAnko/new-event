@@ -1,0 +1,63 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String            @id @default(cuid())
+  email         String            @unique
+  name          String
+  password      String
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+  
+  // Користувач може створювати події
+  createdEvents Event[]           @relation("EventCreator")
+  
+  // Користувач може реєструватися на події
+  registrations EventRegistration[]
+  
+  @@map("users")
+}
+
+model Event {
+  id              String    @id @default(cuid())
+  title           String
+  description     String?
+  date            DateTime
+  location        String
+  maxParticipants Int?
+  imageUrl        String?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  
+  // Зв'язок з користувачем-створювачем
+  creatorId       String
+  creator         User      @relation("EventCreator", fields: [creatorId], references: [id], onDelete: Cascade)
+  
+  // Реєстрації на подію
+  registrations   EventRegistration[]
+  
+  @@map("events")
+}
+
+model EventRegistration {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  
+  // Зв'язок з користувачем
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  // Зв'язок з подією
+  eventId   String
+  event     Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  
+  // Унікальна комбінація користувач-подія
+  @@unique([userId, eventId])
+  @@map("event_registrations")
+}
