@@ -35,7 +35,7 @@ const CreateEvent = () => {
     const token = localStorage.getItem('token');
     console.log(newEvent);
 
-    const response = await axios.post('/api/events', newEvent, {
+    const response = await axios.post('https://new-event-server.onrender.com/api/events', newEvent, {
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',

@@ -22,7 +22,7 @@ const EditEventPage = () => {
   useEffect(() => {
     const fetchEvent = async () => {
       try {
-        const response = await axios.get(`/api/events/${id}`);
+        const response = await axios.get(`https://new-event-server.onrender.com/api/events/${id}`);
         setFormData({
           title: response.data.title || '',
           description: response.data.description || '',
@@ -48,7 +48,7 @@ const EditEventPage = () => {
     e.preventDefault();
 
     try {
-      await axios.put(`/api/events/${id}`, { ...formData });
+      await axios.put(`https://new-event-server.onrender.com/api/events/${id}`, { ...formData });
       toast.success('Подію оновлено!');
       navigate(`/events/${id}`);
     } catch (err: any) {
@@ -70,7 +70,7 @@ const EditEventPage = () => {
   // Підтвердження видалення
   const confirmDelete = async () => {
     try {
-      await axios.delete(`/api/events/${id}`);
+      await axios.delete(`https://new-event-server.onrender.com/api/events/${id}`);
       toast.success('Подію видалено!');
       navigate('/');
     } catch (err: any) {

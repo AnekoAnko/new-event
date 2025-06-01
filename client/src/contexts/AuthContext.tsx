@@ -43,7 +43,7 @@ export const AuthProvider = ({ children }: any) => {
 
   const fetchProfile = async () => {
     try {
-      const response = await axios.get('/api/users/profile');
+      const response = await axios.get('https://new-event-server.onrender.com/api/users/profile');
       setUser(response.data);
     } catch (error) {
       console.error('Failed to fetch profile:', error);
@@ -55,7 +55,7 @@ export const AuthProvider = ({ children }: any) => {
 
   const login = async (email: string, password: string) => {
     try {
-      const response = await axios.post('/api/auth/login', { email, password });
+      const response = await axios.post('https://new-event-server.onrender.com/api/auth/login', { email, password });
       const { user, token } = response.data;
 
       localStorage.setItem('token', token);
@@ -74,7 +74,7 @@ export const AuthProvider = ({ children }: any) => {
 
   const register = async (name: string, email: string, password: string) => {
     try {
-      const response = await axios.post('/api/auth/register', { name, email, password });
+      const response = await axios.post('https://new-event-server.onrender.com/api/auth/register', { name, email, password });
       const { user, token } = response.data;
 
       localStorage.setItem('token', token);

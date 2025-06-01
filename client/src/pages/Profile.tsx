@@ -23,7 +23,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const res = await axios.get('/api/users/profile');
+        const res = await axios.get('https://new-event-server.onrender.com/api/users/profile');
         setProfile(res.data);
         setNewName(res.data.name);
       } catch (err) {
@@ -49,7 +49,7 @@ const Profile = () => {
     setSaving(true);
     setError('');
     try {
-      const res = await axios.put('/api/users/profile', { name: newName.trim() });
+      const res = await axios.put('https://new-event-server.onrender.com/api/users/profile', { name: newName.trim() });
       setProfile(res.data);
       setIsEditing(false);
     } catch (err) {

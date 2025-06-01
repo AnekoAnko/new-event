@@ -19,7 +19,7 @@ const Events = () => {
     const fetchAllEvents = async () => {
       try {
         setLoading(true);
-        const { data } = await axios.get('/api/events');
+        const { data } = await axios.get('https://new-event-server.onrender.com/api/events');
         setEvents(data);
         setLoading(false);
       } catch {
@@ -31,7 +31,7 @@ const Events = () => {
     const fetchMyRegistrations = async () => {
       if (!isAuthenticated) return;
       try {
-        const { data } = await axios.get('/api/users/my-registrations');
+        const { data } = await axios.get('https://new-event-server.onrender.com/api/users/my-registrations');
         setMyRegisteredEvents(data);
       } catch (err) {
         console.error('Не вдалося завантажити мої реєстрації', err);

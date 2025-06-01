@@ -17,7 +17,7 @@ const EventDetails = () => {
   useEffect(() => {
     const fetchEvent = async () => {
       try {
-        const res = await axios.get(`/api/events/${id}`);
+        const res = await axios.get(`https://new-event-server.onrender.com/api/events/${id}`);
         if (res.data) {
           setEvent(res.data);
         } else {
@@ -34,7 +34,7 @@ const EventDetails = () => {
     const checkRegistration = async () => {
       if (!user?.id) return;
       try {
-        const res = await axios.get(`/api/events/${id}/registration-status`);
+        const res = await axios.get(`https://new-event-server.onrender.com/api/events/${id}/registration-status`);
         setIsRegistered(res.data.registered);
       } catch (err) {
         console.error('Помилка перевірки реєстрації:', err);
@@ -48,7 +48,7 @@ const EventDetails = () => {
   const handleRegister = async () => {
     try {
       setActionLoading(true);
-      await axios.post(`/api/events/${id}/register`);
+      await axios.post(`https://new-event-server.onrender.com/api/events/${id}/register`);
       setIsRegistered(true);
     } catch (err) {
       console.error('Помилка при реєстрації:', err);
@@ -62,7 +62,7 @@ const EventDetails = () => {
   const handleUnregister = async () => {
     try {
       setActionLoading(true);
-      await axios.delete(`/api/events/${id}/register`);
+      await axios.delete(`https://new-event-server.onrender.com/api/events/${id}/register`);
       setIsRegistered(false);
     } catch (err) {
       console.error('Помилка при скасуванні реєстрації:', err);
